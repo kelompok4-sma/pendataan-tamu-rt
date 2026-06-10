@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pendataan Tamu RT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 40px;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            margin-top: 25px;
+            border-collapse: collapse;
+            background: white;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Pendataan Tamu RT</h1>
+    
+    <form id="formTamu" onsubmit="simpanData(event)">
+        <label>Nama:</label>
+        <input type="text" id="nama" required placeholder="Masukkan nama tamu">
+
+        <label>Alamat:</label>
+        <input type="text" id="alamat" required placeholder="Masukkan alamat asal">
+
+        <label>Keperluan:</label>
+        <input type="text" id="keperluan" required placeholder="Masukkan keperluan">
+
+        <button type="submit">Kirim Data</button>
+    </form>
+
+    <h3>Daftar Tamu yang Berkunjung:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Keperluan</th>
+            </tr>
+        </thead>
+        <tbody id="tabelTamu">
+            </tbody>
+    </table>
+</div>
+
+<script>
+function simpanData(event) {
+    event.preventDefault(); // Biar halaman gak ke-refresh pas diklik kirim
+
+    // Ambil data dari inputan form
+    var nama = document.getElementById("nama").value;
+    var alamat = document.getElementById("alamat").value;
+    var keperluan = document.getElementById("keperluan").value;
+
+    // Cari posisi tabel tempat nyimpen data
+    var tabel = document.getElementById("tabelTamu");
+
+    // Bikin baris baru di tabel
+    var barisBaru = tabel.insertRow();
+
+    // Masukin datanya satu-satu ke kolom tabel
+    var kolomNama = barisBaru.insertCell(0);
+    var kolomAlamat = barisBaru.insertCell(1);
+    var kolomKeperluan = barisBaru.insertCell(2);
+
+    kolomNama.innerHTML = nama;
+    kolomAlamat.innerHTML = alamat;
+    kolomKeperluan.innerHTML = keperluan;
+
+    // Kasih notifikasi sukses
+    alert("Data tamu atas nama " + nama + " berhasil ditambahkan ke tabel!");
+
+    // Bersihin form biar bisa diisi tamu berikutnya
+    document.getElementById("formTamu").reset();
+}
+</script>
+
+</body>
+</html>
